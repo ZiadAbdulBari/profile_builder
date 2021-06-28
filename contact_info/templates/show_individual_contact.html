@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body-block %}
+
+<div class="card text-center m-auto" style="width: 25rem;">
+  {% if single_contact.image %}
+    <img src="{{single_contact.image.url}}" class="card-img-top img-responsive" alt="..." height="auto" width="330px">
+  {% else %}
+    <img src="{% static 'images/default_profile_picture.png' %}" class="card-img-top" alt="..." height="auto" width="330px">
+  {% endif %}
+  <div class="card-body">
+    <p>Name: {{single_contact.name}}</p>
+    <p>Email: {{single_contact.email}}</p>
+    <p>Phone: {{single_contact.contact_number}}</p>
+    <p>Date of Birth: {{single_contact.dob}}</p>
+    <p>Address: {{single_contact.address}}</p>
+
+  
+    <a href="{% url 'personal_detail:editContact' contact_id=single_contact.id %}"><input type="button" value="Edit Contact" class="btn btn-success btn-sm"></a>
+    <a href="{% url 'personal_detail:contact_list' %}"><input type="button" value="Contact List" class="btn btn-info btn-sm"></a>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body-block %}
+
+<div class="card shadow-sm p-3 mb-5 bg-body rounded ">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{edit_contact_form.image.url}}" class="img-responsive" alt="" height="auto" width="330px" id="blah">
+            </div>
+            <div class="col-md-8">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Name</label>
+                                {{edit_contact_form.name}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Email</label>
+                                {{edit_contact_form.email}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Date Of Birth</label>
+                                {{edit_contact_form.dob}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Upload Image</label>
+                                {{edit_contact_form.image}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Phone No.</label>
+                                {{edit_contact_form.contact_number}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Address</label>
+                                {{edit_contact_form.address}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Gender</label>
+                                {{edit_contact_form.gender}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" value="Add Contact" class="btn btn-success">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{% url 'personal_detail:contact_list' %}" class="fw-bold text-success">Go to contact list>>>>>>>>>>></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    id_image.onchange = evt => {
+      const [file] = id_image.files
+      if (file) {
+        blah.src = URL.createObjectURL(file)
+      }
+    }
+    </script>
+
+{% endblock %}

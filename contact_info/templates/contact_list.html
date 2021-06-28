@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block body-block %}
+
+<div class="card shadow-sm p-3 mb-5 bg-body rounded">
+    <div class="card-header bg-warning">
+        <div class="row">
+            <div class="col-md-5">
+                <a href="{% url 'personal_detail:addContact' %}"><input type="button" value="Add Contact" class="btn btn-dark btn-sm mt-2"></a>
+            </div>
+            <div class="col-md-7"><h3>Contact List</h3></div>
+        </div>
+        
+      </div>
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
+    {% endif %}
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact No.</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if row_count %}
+                {% for contact_list in contact_lists %}
+                <tr>
+                    <td>{{contact_list.id}}</td>
+                    <td>{{contact_list.name}}</td>
+                    <td>{{contact_list.email}}</td>
+                    <td>{{contact_list.contact_number}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <a href="{% url 'personal_detail:showIndividualContact' contact_id=contact_list.id %}"><input type="button" class="btn btn-warning btn-sm" value="Detail>>"></a>
+                            
+                            <a href="{% url 'personal_detail:editContact' contact_id=contact_list.id %}"><input type="button" class="btn btn-success btn-sm" value="Edit Contact"></a>
+                            <a href="{% url 'personal_detail:deleteContact' contact_id=contact_list.id %}"><input type="button" class="btn btn-danger btn-sm" value="Delete Contact"></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center"><h5>There is no contact information</h5></td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
